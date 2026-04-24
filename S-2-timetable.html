@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            td{
+                padding: 10px;
+            }
+            body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;  /* horizontal center */
+      align-items: center;      /* vertical center */
+      font-family: Arial;
+    }
+        </style>
+</head>
+<body>
+    <table border="1" style="border-color: brown; padding: 10px;">
+        <tr>
+            <th>subjects</th>
+            <th>date</th>
+            <th>time</th>
+            <td>Countdown</td>
+        </tr>
+        <tr>
+            <td>Maths</td>
+            <td>5/5/2026</td>
+            <td>1:00 pm to 3:30 pm</td>
+            <td id="ex1"></td>
+        </tr>
+        <tr>
+            <td>Chemistry</td>
+            <td>7/5/2026</td>
+            <td>9:30 am to 12-noon</td>
+            <td id="ex2"></td>
+        </tr>
+        <tr>
+            <td>Foundation</td>
+            <td>11/5/2026</td>
+            <td>1:00 pm to 3:30 pm</td>
+            <td id="ex3"></td>
+        </tr>
+        <tr>
+            <td>C-programming</td>
+            <td>13/5/2026</td>
+            <td>1:00 pm to 3:30 pm</td>
+            <td id="ex4"></td>
+        </tr>
+        <tr>
+            <td>IPR</td>
+            <td>15/5/2026</td>
+            <td>9:30 am to 12-noon</td>
+            <td id="ex5"></td>
+        </tr> 
+        <tr>
+            <td>AI-introduction</td>
+            <td>18/5/2026</td>
+            <td>9:30 am to 12-noon</td>
+            <td id="ex6"></td>
+        </tr>
+            
+    </table>
+    <script>
+function startCountdown(targetDate, elementId, onEnd = null) {
+  const target = new Date(targetDate).getTime();
+  const el = document.getElementById(elementId);
+
+  if (!el) {
+    console.error("Element not found:", elementId);
+    return;
+  }
+
+  const interval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = target - now;
+
+    if (distance <= 0) {
+      clearInterval(interval);
+      el.innerHTML = "Countdown Finished!";
+      if (onEnd) onEnd();
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    el.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }, 1000);
+}
+startCountdown("May 5, 2026 01:00:00 PM", "ex1");
+startCountdown("May 7, 2026 09:30:00 AM", "ex2");
+startCountdown("May 11, 2026 01:00:00 PM", "ex3");
+startCountdown("May 13, 2026 01:00:00 PM", "ex4");
+startCountdown("May 15, 2026 09:30:00 AM", "ex5");
+startCountdown("May 18, 2026 09:30:00 AM", "ex6");
+    </script>
+</body>
+</html>
